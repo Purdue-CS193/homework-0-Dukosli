@@ -1,37 +1,61 @@
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/kalutes/CS193_Fall18_Lab1/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+# Aydan's First CS193 Homework
+- Yeah so you see 
+- All the things I like
+- I love that all my friends (like 6 people) are all in 193 together
 ```
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+public class It {
+    public static void main(String[] args) {
+        try {
+            File n = new File("./src/If.java");
+            FileWriter f = new FileWriter(n);
+            BufferedWriter bw = new BufferedWriter(f);
 
-### Jekyll Themes
+            if (n.createNewFile()) {
+                System.out.println("Yeah");
+            }
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kalutes/CS193_Fall18_Lab1/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+            bw.write(String.format("""
+                    import java.util.Scanner;
 
-### Support or Contact
+                    public class If {
+                        public static void main(String[] args) {
+                            Scanner sc = new Scanner(System.in);
+                            int c = sc.nextInt();
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+                            System.out.println(isEven(c));
+                            sc.close();
+                        }
+
+                        static boolean isEven(int n) {
+                    """));
+
+            for (int i = -42; i <= 67; i++) {
+                bw.write(String.format("\t\tif (n == %d) {\n\t\t", i));
+                if (i%2 == 0) {
+                    bw.write("\treturn true;");
+                } else {
+                    bw.write("\treturn false;");
+                }
+                bw.write(String.format("\n\t\t}\n"));
+            }
+
+            bw.write(String.format("""
+                        return false;
+                        }
+                    }
+                    """));
+
+
+            bw.close();
+            f.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+```
